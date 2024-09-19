@@ -6,6 +6,15 @@ name: CI
 on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: false
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -32,3 +41,6 @@ jobs:
         shell: bash
         run: cat text.txt
         id: extract_cat
+
+      - name: Print environment
+        run: "echo 'Environment to deploy to: ${{ github.event.inputs.environment }}'"
