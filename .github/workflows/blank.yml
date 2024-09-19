@@ -19,6 +19,10 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
+      - name: Exit if on main
+        if: github.ref == 'refs/heads/main'
+        run: exit 1
+
       - name: Extract branch name
         shell: bash
         run: echo ${GITHUB_REF##*/}
